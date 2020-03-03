@@ -15,7 +15,7 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.add_role params[:role]
+    @user.add_role params[:user][:role]
     if @user.invite!
       redirect_to admin_users_path, notice: 'User Added Successfully'
     else
@@ -26,7 +26,12 @@ class Admin::UsersController < ApplicationController
   def edit; end
 
   def update
+    @user.remove_role @user.has_roles
+    @user.add_role params[:user][:role]
     if @user.update(user_params)
+      if params[:profile_picture].present?
+        @user.profile_picture.attach(params[:profile_picture])
+      end
       redirect_to admin_users_path, notice: 'User Updated Successfully'
     else
       render :edit
@@ -46,6 +51,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :profile_picture)
   end
 end
