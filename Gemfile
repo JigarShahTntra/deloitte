@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise', '~> 4.7', '>= 4.7.1'
+gem 'devise_invitable', '~> 2.0.0'
 gem "rolify"
 gem "cancan"
 # Use Active Storage variant
@@ -43,6 +44,7 @@ group :development do
   gem 'spring'
   gem 'pry', '~> 0.12.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rspec-rails', '~> 4.0.0.beta'
 end
 
 group :test do

@@ -7,7 +7,7 @@ puts 'roles created'
 
 user = User.find_or_create_by(email: 'jigarshah2097@gmail.com') do |user|
   user.password = '123456'
-  user.add_role :super_admin
+  user.add_role :admin
   # user.confirmed_at = Time.now
 end
 
