@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_03_133230) do
+ActiveRecord::Schema.define(version: 2020_03_04_053735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,13 +36,17 @@ ActiveRecord::Schema.define(version: 2020_03_03_133230) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "images", force: :cascade do |t|
+  create_table "organizations", force: :cascade do |t|
     t.string "name"
-    t.string "imageable_type"
-    t.bigint "imageable_id"
+    t.string "phone_number"
+    t.string "cin"
+    t.string "gst"
+    t.string "pan"
+    t.string "url"
+    t.string "address"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -71,8 +75,10 @@ ActiveRecord::Schema.define(version: 2020_03_03_133230) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "organization_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -85,4 +91,5 @@ ActiveRecord::Schema.define(version: 2020_03_03_133230) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "users", "organizations"
 end

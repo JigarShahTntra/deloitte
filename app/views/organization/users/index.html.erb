@@ -1,4 +1,4 @@
-<%= link_to 'New', new_admin_user_path %>
+<%= link_to 'New', new_organization_user_path %>
 <% if @users.present? %>
   <table>
     <thead>
@@ -7,6 +7,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Roles</th>
+        <th>Organization</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -17,9 +18,10 @@
           <td><%= user.name %></td>
           <td><%= user.email %>
           <td><%= user.has_roles.humanize %></td>
+          <td><%= user&.organization&.name %></td>
           <td>
-            <%= link_to 'Edit', edit_admin_user_path(user) %>
-            <%= link_to 'Delete', admin_user_path(user), method: :delete %>
+            <%= link_to 'Edit', edit_organization_user_path(id: user.id) %>
+            <%= link_to 'Delete', organization_user_path(id: user.id), method: :delete %>
           </td>
         </tr>
       <% end %>

@@ -1,0 +1,31 @@
+<%= link_to 'New', new_organization_path %>
+<% if @organizations.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone numebr</th>
+        <th>URL</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @organizations.each do |organization| %>
+        <tr>
+          <td><%= link_to organization.name, organization_path(organization) %></td>
+          <td><%= organization.phone_number %>
+          <td><%= organization.url %></td>
+          <td><%= organization.status %></td>
+          <td>
+            <%= link_to 'Edit', edit_organization_path(organization) %>
+            <%= link_to 'Delete', organization_path(organization), method: :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  No records found.
+<% end %>
+<%= link_to 'Back', root_path %>

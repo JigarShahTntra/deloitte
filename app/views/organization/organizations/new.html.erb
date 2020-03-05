@@ -1,7 +1,7 @@
 <h2>Sign up</h2>
 
-<%= form_with(model: Organization, url: organizations_path, method: :post, local: true) do |f| %>
-  <%= render "users/shared/error_messages", resource: @user %>
+<%= form_for(@organization) do |f| %>
+  <%= render "users/shared/error_messages", resource: @organization %>
 
   <h4> Organization Details </h4>
 
@@ -36,8 +36,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :contact_person %><br />
-    <%= f.text_field :contact_person %>
+    <%= f.label :address %><br />
+    <%= f.text_area :address %>
   </div>
 
   <h4> Primary Contact Details </h4>
@@ -53,10 +53,7 @@
       <%= u.email_field :email %>
     </div>
 
-    <div class="field">
-      <%= u.label :password %><br />
-      <%= u.password_field :password %>
-    </div>
+    <%= u.hidden_field :password, value: Random.hex(12) %>
   <% end %>
 
   <div class="actions">
@@ -64,4 +61,3 @@
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>

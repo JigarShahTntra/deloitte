@@ -1,3 +1,4 @@
-<%= link_to 'Users', admin_users_path if current_user.has_role? :admin %>
+<%= link_to 'Organizations', organizations_path if can? :manage, Organization %>
+<%= link_to 'Users', organization_users_path(current_user.organization_id) unless current_user.has_role? :super_admin  %>
 <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
 <%= link_to 'Setting', edit_user_registration_path %>

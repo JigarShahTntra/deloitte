@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
-class Admin::UsersController < ApplicationController
+class Organization::UsersController < ApplicationController
+  # load_and_authorize_resource
   before_action :authenticate_user!
   before_action :set_user, only: %i[edit update destroy]
+  before_action :set_organization, only: %i[create]
 
   def index
-    @users = User.all
-    authorize! :manage, @users
+    organization = Organization.find_by(id: params[:organization_id])
+    @users = organization.users
+    @users = @users.accessible_by(current_ability, :manage)
   end
 
   def new
@@ -14,10 +17,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = @organization.users.new(user_params)
     @user.add_role params[:user][:role]
-    if @user.invite!
-      redirect_to admin_users_path, notice: 'User Added Successfully'
+    if @user.save
+      redirect_to organization_users_path, notice: 'User Added Successfully'
     else
       render :new
     end
@@ -32,7 +35,7 @@ class Admin::UsersController < ApplicationController
       if params[:profile_picture].present?
         @user.profile_picture.attach(params[:profile_picture])
       end
-      redirect_to admin_users_path, notice: 'User Updated Successfully'
+      redirect_to organization_users_path, notice: 'User Updated Successfully'
     else
       render :edit
     end
@@ -45,12 +48,17 @@ class Admin::UsersController < ApplicationController
 
   private
 
+  def set_organization
+    @organization = Organization.find_by(id: params[:organization_id])
+  end
+
+
   def set_user
     @user = User.find_by(id: params[:id])
-    authorize! :manage, @user
+    # authorize! :manage, @user
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :profile_picture)
+    params.require(:user).permit(:name, :email, :profile_picture, :password)
   end
 end
