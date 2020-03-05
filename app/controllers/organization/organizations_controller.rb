@@ -5,7 +5,7 @@ class Organization::OrganizationsController < ApplicationController
   before_action :set_organization, only: %w[edit update show]
 
   def index
-    @organizations = Organization.accessible_by(current_ability, :manage)
+    @organizations = Organization.accessible_by(current_ability, :read)
   end
 
   def new
@@ -23,9 +23,22 @@ class Organization::OrganizationsController < ApplicationController
     end
   end
 
-  def show; end
+  def update
+    authorize! :update, @organization
+    if @organization.update(organization_params)
+      redirect_to organizations_path, notice: 'Updated successfully.'
+    else
+      render :edit
+    end
+  end
 
-  def edit; end
+  def show
+    authorize! :read, @organization
+  end
+
+  def edit 
+    authorize! :read, @organization
+  end
 
   private
 

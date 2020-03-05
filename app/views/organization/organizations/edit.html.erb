@@ -40,24 +40,7 @@
     <%= f.text_area :address %>
   </div>
 
-  <h4> Primary Contact Details </h4>
-
-  <%= f.fields_for :users do |u| %>
-    <div class="field">
-      <%= u.label :name %><br />
-      <%= u.text_field :name, autofocus: true %>
-    </div>
-
-    <div class="field">
-      <%= u.label :email %><br />
-      <%= u.email_field :email %>
-    </div>
-
-    <%= u.hidden_field :password, value: Random.hex(12) %>
-  <% end %>
-
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
-

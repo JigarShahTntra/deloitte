@@ -11,6 +11,7 @@ class Ability
 
     if user.has_role? :admin
       can :manage, User, organization_id: user.organization_id
+      can :manage, Organization, id: user.organization_id
     end
     #
     # The first argument to `can` is the action you are giving the user 
