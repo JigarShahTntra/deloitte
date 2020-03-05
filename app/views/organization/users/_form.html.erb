@@ -21,7 +21,7 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <%= f.hidden_field :password, value: Random.hex(12) %>
+  <%= f.hidden_field :password, value: generate_random_password if action_name.eql?('new')%>
 
   <div class="actions">
     <%= f.submit %>

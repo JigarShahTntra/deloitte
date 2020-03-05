@@ -2,7 +2,7 @@
 
 class Organization::OrganizationsController < ApplicationController
   # load_and_authorize_resource
-  before_action :set_organization, only: %w[edit update show]
+  before_action :organization, only: %w[edit update show]
 
   def index
     @organizations = Organization.accessible_by(current_ability, :read)
@@ -46,8 +46,8 @@ class Organization::OrganizationsController < ApplicationController
     current_user.present? ? organizations_path : new_user_session_path
   end
 
-  def set_organization
-    @organization = Organization.find_by(id: params[:id])
+  def organization
+    @organization ||= Organization.find_by(id: params[:id])
   end
 
   def organization_params

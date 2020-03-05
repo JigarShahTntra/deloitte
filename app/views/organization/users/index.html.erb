@@ -12,19 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= image_tag user.profile_picture.variant(resize_to_limit: [100, 100]) if user.profile_picture.attached? %></td>
-          <td><%= user.name %></td>
-          <td><%= user.email %>
-          <td><%= user.has_roles.humanize %></td>
-          <td><%= user&.organization&.name %></td>
-          <td>
-            <%= link_to 'Edit', edit_organization_user_path(id: user.id) %>
-            <%= link_to 'Delete', organization_user_path(id: user.id), method: :delete %>
-          </td>
-        </tr>
-      <% end %>
+      <%= render partial: 'table', locals: { users: @users } %>
     </tbody>
   </table>
 <% else %>

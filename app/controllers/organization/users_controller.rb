@@ -32,9 +32,6 @@ class Organization::UsersController < ApplicationController
     @user.remove_role @user.has_roles
     @user.add_role params[:user][:role]
     if @user.update(user_params)
-      if params[:profile_picture].present?
-        @user.profile_picture.attach(params[:profile_picture])
-      end
       redirect_to organization_users_path, notice: 'User Updated Successfully'
     else
       render :edit
@@ -43,7 +40,7 @@ class Organization::UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to admin_users_path, notice: 'User Deleted Successfully'
+    redirect_to organization_users_path, notice: 'User Deleted Successfully'
   end
 
   private
@@ -55,7 +52,6 @@ class Organization::UsersController < ApplicationController
 
   def set_user
     @user = User.find_by(id: params[:id])
-    # authorize! :manage, @user
   end
 
   def user_params

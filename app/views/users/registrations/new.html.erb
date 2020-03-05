@@ -5,58 +5,12 @@
 
   <h4> Organization Details </h4>
 
-  <div class="field">
-    <%= f.label :organization_name %><br />
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number %>
-  </div>
-
-  <div class="field">
-    <%= f.label :cin %><br />
-    <%= f.text_field :cin %>
-  </div>
-
-  <div class="field">
-    <%= f.label :pan %><br />
-    <%= f.text_field :pan %>
-  </div>
-
-  <div class="field">
-    <%= f.label :gst %><br />
-    <%= f.text_field :gst %>
-  </div>
-
-  <div class="field">
-    <%= f.label :contact_person %><br />
-    <%= f.text_field :contact_person %>
-  </div>
+  <%= render partial: 'organization/organizations/organization_form_fields', locals: { f: f } %>
 
   <h4> Primary Contact Details </h4>
 
   <%= f.fields_for :users do |u| %>
-    <div class="field">
-      <%= u.label :name %><br />
-      <%= u.text_field :name, autofocus: true %>
-    </div>
-
-    <div class="field">
-      <%= u.label :email %><br />
-      <%= u.email_field :email %>
-    </div>
-
-    <div class="field">
-      <%= u.label :password %><br />
-      <%= u.password_field :password %>
-    </div>
+    <%= render partial: 'organization/organizations/primary_contact_fields', locals: { u: u } %>
   <% end %>
 
   <div class="actions">

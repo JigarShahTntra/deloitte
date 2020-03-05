@@ -46,6 +46,7 @@ group :development do
   gem 'spring'
   gem 'pry', '~> 0.12.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 4.0.0.beta'
 end
 
