@@ -1,0 +1,17 @@
+<%= form_for(organization) do |f| %>
+  <%= render "users/shared/error_messages", resource: organization %>
+
+  <h4> Organization Details </h4>
+
+  <%= render partial: 'organization_form_fields', locals: { f: f } %>
+
+  <h4> Primary Contact Details </h4>
+
+  <%= f.fields_for :users do |u| %>
+    <%= render partial: 'primary_contact_fields', locals: { u: u } %>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

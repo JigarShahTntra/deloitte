@@ -1,0 +1,12 @@
+<h2>Edit</h2>
+
+<%= form_for(@organization) do |f| %>
+  <%= render "users/shared/error_messages", resource: @organization %>
+
+  <h4> Organization Details </h4>
+  <%= render partial: 'organization_form_fields', locals: { f: f } %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,4 @@
-roles = %w[ceo rmp partner director senior_manager manager assistant_manager senior associate junior admin]
+roles = %w[ceo rmp partner director senior_manager manager assistant_manager senior associate junior admin super_admin]
 
 roles.each do |role|
   Role.find_or_create_by(name: role)
@@ -8,7 +8,7 @@ puts 'roles created'
 user = User.find_or_create_by(email: 'jigarshah2097@gmail.com') do |user|
   user.name = 'jigar shah'
   user.password = '123456'
-  user.add_role :admin
+  user.add_role :super_admin
   # user.confirmed_at = Time.now
 end
 

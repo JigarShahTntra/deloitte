@@ -1,0 +1,11 @@
+<% organizations.each do |organization| %>
+  <tr>
+    <td><%= link_to organization.name, organization_path(organization) %></td>
+    <td><%= organization.phone_number %>
+    <td><%= organization.url %></td>
+    <td><%= organization.status %></td>
+    <td>
+      <%= link_to 'Edit', edit_organization_path(organization) %>
+    </td>
+  </tr>
+<% end %>

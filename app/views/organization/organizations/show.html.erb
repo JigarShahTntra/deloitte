@@ -1,0 +1,10 @@
+Name: <%= @organization.name %><br />
+Phone Number: <%= @organization.phone_number %><br />
+URL: <%= @organization.url %><br />
+CIN Number: <%= @organization.cin %><br />
+GST: <%= @organization.gst %><br />
+PAN Number: <%= @organization.pan %><br />
+Address: <%= @organization.address %><br />
+Status: <%= @organization.status %><br />
+
+<%= link_to 'Users', organization_users_path(@organization) %>

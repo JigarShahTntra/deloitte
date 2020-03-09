@@ -1,0 +1,21 @@
+<%= link_to 'New', new_organization_user_path %>
+<% if @users.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Profile Picture</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Organization</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'table', locals: { users: @users } %>
+    </tbody>
+  </table>
+<% else %>
+  No records found.
+<% end %>
+<%= link_to 'Back', root_path %>

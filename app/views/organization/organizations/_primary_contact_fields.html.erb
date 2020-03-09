@@ -1,0 +1,11 @@
+<div class="field">
+  <%= u.label :name %><br />
+  <%= u.text_field :name, autofocus: true %>
+</div>
+
+<div class="field">
+  <%= u.label :email %><br />
+  <%= u.email_field :email %>
+</div>
+
+<%= u.hidden_field :password, value: generate_random_password %>
